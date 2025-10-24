@@ -49,7 +49,7 @@ class FSHomeUserInfoAdapter(val viewModel: FSHomeViewModel) :
                 fsTvUsername.text = context.getString(R.string.fs_login_now)
             }
 
-            fsTvUsername.onClick {
+            fsClTopBar.onClick {
                 if (item == null) {
                     FSLoginDialog(context)
                         .setOnLoginClickListener { arg1, arg2, type ->
@@ -58,6 +58,7 @@ class FSHomeUserInfoAdapter(val viewModel: FSHomeViewModel) :
                         .show()
                 }
             }
+
         }
     }
 

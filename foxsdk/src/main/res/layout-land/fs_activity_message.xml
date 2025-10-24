@@ -119,6 +119,7 @@
     <View
         android:id="@+id/fs_v_start_safe_area"
         android:layout_width="@dimen/dp_45"
+        android:visibility="invisible"
         android:layout_height="match_parent"
         android:background="@color/fs_activity_bg"
         app:layout_constraintStart_toStartOf="parent"

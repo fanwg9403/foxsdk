@@ -16,8 +16,8 @@ import com.youth.banner.adapter.BannerAdapter
  * @CreateTime 2025年 10月 14日 12点 03 分
  * @Desc TODO:
  */
-class FSBannerAdapter(data: List<FSHomeBanner> = listOf()) :
-    BannerAdapter<FSHomeBanner, FSBannerAdapter.VH>(data) {
+class FSBannerAdapter(list: List<FSHomeBanner> = listOf()) :
+    BannerAdapter<FSHomeBanner, FSBannerAdapter.VH>(list) {
     override fun onCreateHolder(parent: ViewGroup, viewType: Int): VH? {
         return VH(parent)
     }
@@ -29,7 +29,7 @@ class FSBannerAdapter(data: List<FSHomeBanner> = listOf()) :
                 .transform(FSGlideRoundTransform(it.context, 9))
                 .into(it)
             it.onClick {
-                FSWebActivity.startWithUrl(it.context, data.objLink ?: "")
+                FSWebActivity.startWithUrl(it.context, data.link ?: "")
             }
         }
     }

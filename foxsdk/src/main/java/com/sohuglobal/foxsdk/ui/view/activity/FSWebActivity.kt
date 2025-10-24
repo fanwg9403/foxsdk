@@ -153,7 +153,7 @@ class FSWebActivity : FragmentActivity() {
                 mWebView?.goBack()
             } else {
                 finishActivity()
-                super.onBackPressed()
+//                super.onBackPressed()
             }
         }
     }

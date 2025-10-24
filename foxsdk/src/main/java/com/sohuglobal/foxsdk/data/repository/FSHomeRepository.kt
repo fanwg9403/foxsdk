@@ -1,5 +1,7 @@
 package com.sohuglobal.foxsdk.data.repository
 
+import android.content.res.Configuration
+import com.sohuglobal.foxsdk.core.FoxSdkConfig
 import com.sohuglobal.foxsdk.core.WishFoxSdk
 import com.sohuglobal.foxsdk.data.network.FoxSdkApiService
 import com.sohuglobal.foxsdk.data.network.FoxSdkRetrofitManager
@@ -57,6 +59,7 @@ class FSHomeRepository : FoxSdkBaseRepository() {
     }
 
     suspend fun getAdvertiseList() = executeCall {
-        service.getAdvertiseList(1, 10, "app-yx-grzx")
+        val isLandscape = WishFoxSdk.getConfig().screenOrientation == FoxSdkConfig.ORIENTATION_LANDSCAPE
+        service.getAdvertiseList(1, 10, "app-yx-grzx${if (isLandscape) "-hp" else ""}")
     }
 }

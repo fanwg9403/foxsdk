@@ -72,17 +72,16 @@ class FSPayDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.fsCtvAgree.onClick {
-            binding.fsCtvAgree.isChecked = !binding.fsCtvAgree.isChecked
-            binding.fsTvConfirm.isEnabled = binding.fsCtvAgree.isChecked
-            binding.fsTvConfirm.alpha = if (binding.fsCtvAgree.isChecked) 1f else 0.5f
+        if (binding.fsCheckRadioGroup.getCheckedItem() != null) {
+            binding.fsTvConfirm.isEnabled = true
+            binding.fsTvConfirm.alpha = 1f
+        } else {
+            binding.fsTvConfirm.isEnabled = false
+            binding.fsTvConfirm.alpha = 0.5f
         }
+
         binding.fsCheckRadioFoxCoin.setText(ctx.getString(R.string.fs_fox_coin_pay) + "（余额：${FSCoinInfo.getInstance()?.foxCoin ?: 0}）")
         binding.fsTvConfirm.onClick {
-            if (!binding.fsCtvAgree.isChecked) {
-                Toaster.show("请先阅读并同意${ctx.getString(R.string.fs_pay_agreement)}协议")
-                return@onClick
-            }
             loading = FSLoadingDialog(ctx)
             loading?.show()
             when (binding.fsCheckRadioGroup.getCheckedItemPosition()) {
@@ -144,18 +143,26 @@ class FSPayDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
                         FoxSdkPayEnum.FOX_COIN -> {
                             // 狐币
                             loading?.dismiss()
-                            onPayCreate?.invoke(FSPayResult(true, it.data?.trade_number ?: (it.data?.busy_code ?: ""),
-                                FoxSdkPayEnum.FOX_COIN))
+                            onPayCreate?.invoke(
+                                FSPayResult(
+                                    true, it.data?.trade_number ?: (it.data?.busy_code ?: ""),
+                                    FoxSdkPayEnum.FOX_COIN
+                                )
+                            )
                         }
 
                         FoxSdkPayEnum.ALI_PAY -> {
                             // 支付宝
                             it.data?.code_url?.let { codeUrl ->
-                                if(FoxSdkAliPay.payAliYiMa(ctx, codeUrl, it.data.jump_url)){
-                                    onPayCreate?.invoke(FSPayResult(true,it.data.pos_seq,
-                                        FoxSdkPayEnum.ALI_PAY))
+                                if (FoxSdkAliPay.payAliYiMa(ctx, codeUrl, it.data.jump_url)) {
+                                    onPayCreate?.invoke(
+                                        FSPayResult(
+                                            true, it.data.pos_seq,
+                                            FoxSdkPayEnum.ALI_PAY
+                                        )
+                                    )
                                 }
-                            }?: run {
+                            } ?: run {
                                 Toaster.show("支付失败")
                             }
                             loading?.dismiss()
@@ -174,9 +181,13 @@ class FSPayDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
                             params["channel_id"] = channelId
                             params["cp_order_id"] = cpOrderId
                             params["paySource"] = 23
-                            if(FoxSdkWxPay.wXMiniProgramPayment(ctx, params)){
-                                onPayCreate?.invoke(FSPayResult(true,it.data?.pos_seq ?:"",
-                                    FoxSdkPayEnum.WECHAT))
+                            if (FoxSdkWxPay.wXMiniProgramPayment(ctx, params)) {
+                                onPayCreate?.invoke(
+                                    FSPayResult(
+                                        true, it.data?.pos_seq ?: "",
+                                        FoxSdkPayEnum.WECHAT
+                                    )
+                                )
                             }
                             loading?.dismiss()
                         }

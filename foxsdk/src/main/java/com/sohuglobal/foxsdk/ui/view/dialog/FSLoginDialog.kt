@@ -11,6 +11,7 @@ import com.sohuglobal.foxsdk.R
 import com.sohuglobal.foxsdk.core.FoxSdkConfig
 import com.sohuglobal.foxsdk.databinding.FsDialogLoginBinding
 import com.sohuglobal.foxsdk.core.WishFoxEntryActivity
+import com.sohuglobal.foxsdk.ui.view.activity.FSWebActivity
 import com.sohuglobal.foxsdk.ui.view.widgets.FSLoadingDialog
 import com.sohuglobal.foxsdk.utils.FoxSdkUtils
 import com.sohuglobal.foxsdk.utils.custom.CustomLiveData
@@ -100,6 +101,12 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
                     WishFoxEntryActivity::class.java
                 ).setAction(FoxSdkConfig.WishFoxActions.WISH_FOX_AUTH_ACTION)
             )
+        }
+        binding.fsTvUserAgreement.onClick {
+            FSWebActivity.startWithUrl(ctx, "https://world.sohuglobal.com/gameOfUser.html")
+        }
+        binding.fsTvPrivacyAgreement.onClick {
+            FSWebActivity.startWithUrl(ctx, "https://world.sohuglobal.com/gaemOfPrivacy.html")
         }
     }
 

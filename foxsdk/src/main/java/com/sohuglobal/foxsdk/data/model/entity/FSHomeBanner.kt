@@ -10,6 +10,5 @@ import com.google.gson.annotations.SerializedName
 data class FSHomeBanner(
     val id: Long? = null,
     val image: String? = null,
-    @SerializedName("obj_link")
-    val objLink: String? = null,
+    val link: String? = null,
 )

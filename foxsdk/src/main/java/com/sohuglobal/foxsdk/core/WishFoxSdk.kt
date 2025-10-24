@@ -75,6 +75,7 @@ object WishFoxSdk {
                 "com.sohuglobal.foxsdk.ui.view.activity.FSGameRecordActivity",
                 "com.qiyukf.unicorn.ui.activity.ServiceMessageActivity",
                 "com.sohuglobal.foxsdk.ui.view.activity.FSMessageActivity",
+                "com.sohuglobal.foxsdk.ui.view.activity.FSWebActivity",
             )
         }
         fxAppControl.setClickListener { it ->

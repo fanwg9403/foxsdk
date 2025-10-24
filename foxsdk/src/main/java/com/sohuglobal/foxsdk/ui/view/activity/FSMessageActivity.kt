@@ -52,6 +52,7 @@ class FSMessageActivity :
             .init()
         binding.fsMessageRoot.apply {
             post {
+                FoxSdkUtils.runOnUIThreadDelay(100) { binding.fsVStartSafeArea.alpha = 1f }
                 translation("HORIZONTAL", -600, 0, 300)
                 binding.fsVTopSafeArea.translation("HORIZONTAL", -600, 0, 300)
             }

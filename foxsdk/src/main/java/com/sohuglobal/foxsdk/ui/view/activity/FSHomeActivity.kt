@@ -6,28 +6,21 @@ import androidx.activity.viewModels
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ImmersionBar
-import com.hjq.toast.Toaster
 import com.scwang.smart.refresh.header.ClassicsHeader
-import com.sohuglobal.foxsdk.R
 import com.sohuglobal.foxsdk.core.FoxSdkConfig
-import com.sohuglobal.foxsdk.data.model.entity.FSUserInfo
 import com.sohuglobal.foxsdk.databinding.FsActivityHomeBinding
 import com.sohuglobal.foxsdk.di.FoxSdkViewModelFactory
 import com.sohuglobal.foxsdk.domain.intent.FSHomeIntent
-import com.sohuglobal.foxsdk.domain.intent.FSMessageIntent
 import com.sohuglobal.foxsdk.ui.base.FoxSdkBaseMviActivity
 import com.sohuglobal.foxsdk.ui.view.adapter.FSHomeActionAdapter
 import com.sohuglobal.foxsdk.ui.view.adapter.FSHomeBannerAdapter
 import com.sohuglobal.foxsdk.ui.view.adapter.FSHomeRegionAdapter
 import com.sohuglobal.foxsdk.ui.view.adapter.FSHomeUserInfoAdapter
 import com.sohuglobal.foxsdk.ui.view.dialog.FSAlertDialog
-import com.sohuglobal.foxsdk.ui.view.dialog.FSPayDialog
 import com.sohuglobal.foxsdk.ui.viewmodel.FSHomeViewModel
 import com.sohuglobal.foxsdk.ui.viewstate.FSHomeViewState
-import com.sohuglobal.foxsdk.utils.FoxSdkPayEnum
 import com.sohuglobal.foxsdk.utils.FoxSdkUtils
 import com.sohuglobal.foxsdk.utils.onClick
-import com.sohuglobal.foxsdk.utils.pay.FoxSdkPayResult
 import com.sohuglobal.foxsdk.utils.translation
 
 /**
@@ -48,7 +41,6 @@ class FSHomeActivity :
                 Pair("游戏记录", 0),
                 Pair("充值记录", 1),
                 Pair("我的消息", 2),
-                Pair("退出登录", 3),
                 Pair("", -1)
             )
         ) { it ->
@@ -140,6 +132,7 @@ class FSHomeActivity :
             post {
                 translation("HORIZONTAL", -600, 0, 300)
                 binding.fsVTopSafeArea.translation("HORIZONTAL", -600, 0, 300)
+                FoxSdkUtils.runOnUIThreadDelay(100) { binding.fsVStartSafeArea.alpha = 1f }
             }
         }
 
@@ -151,7 +144,7 @@ class FSHomeActivity :
         }
 
         binding.fsVOutside.onClick { finish() }
-        binding.fsHomeRoot.isEnabled = false
+        binding.fsHomeRoot.isEnabled = true
         binding.fsHomeRoot.setRefreshHeader(ClassicsHeader(this))
         dispatch(FSHomeIntent.Init())
         binding.fsHomeRoot.setOnRefreshListener {
@@ -162,7 +155,6 @@ class FSHomeActivity :
     override fun renderState(state: FSHomeViewState) {
         binding.fsHomeRoot.finishRefresh()
         if (state.userInfo != null && state.loginSuccess) {
-            binding.fsHomeRoot.isEnabled = true
             if (state.coinInfo != null) {
                 state.userInfo.foxCoin = (state.coinInfo.balanceCoin?.toFloat())?.toInt() ?: 0
             }
@@ -171,7 +163,6 @@ class FSHomeActivity :
             adapterHelper.addAfterAdapter(actionAdapter)
 
         } else {
-            binding.fsHomeRoot.isEnabled = false
             // 未登录
             userInfoAdapter.item = null
             if (adapterHelper.afterAdapterList.contains(actionAdapter)) {
@@ -183,6 +174,7 @@ class FSHomeActivity :
     }
 
     override fun finish() {
+        FoxSdkUtils.runOnUIThreadDelay(200) { binding.fsVStartSafeArea.alpha = 0f }
         binding.fsVTopSafeArea.translation("HORIZONTAL", 0, -600, 300)
         binding.fsHomeRoot.translation("HORIZONTAL", 0, -600, 300) {
             FoxSdkUtils.runOnUIThreadDelay(50) { super.finish() }

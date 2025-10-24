@@ -71,6 +71,7 @@
         <!-- WebView -->
         <activity
             android:name="com.sohuglobal.foxsdk.ui.view.activity.FSWebActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
 
         <!-- 许愿狐授权入口 -->
