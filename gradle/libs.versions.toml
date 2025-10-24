@@ -1,0 +1,92 @@
+[versions]
+agp = "8.13.0"
+kotlin = "2.2.20"
+coreKtx = "1.17.0"
+coroutines = "1.10.2"
+appcompat = "1.7.1"
+material = "1.13.0"
+activity = "1.11.0"
+fragment = "1.8.9"
+constraintlayout = "2.2.1"
+recyclerview = "1.4.0"
+
+# 第三方库
+immersionbar = "3.2.2"
+autoSize = "v1.2.1"
+toaster = "13.6"
+shapeView = "10.0"
+shapeDrawable = "3.3"
+glide = "5.0.5"
+bugly = "4.1.9.3"
+qiyukf = "10.12.0"
+floatingx = "2.3.7"
+xpop = "2.10.0"
+refresh = "3.0.0-alpha"
+bravh = "4.3.2"
+roundImage = "2.3.0"
+banner = "2.2.3"
+
+# 支付框架
+alipay = "+"
+wechat = "+"
+
+# 权限申请框架
+xXPermission = "20.0"
+
+# 网络框架
+lifecycle = "2.9.4"
+retrofit = "3.0.0"
+okhttp = "5.2.1"
+gson = "2.13.2"
+
+# 许愿狐SDK
+wishFox = "1.0.0"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlin-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+sohuglobal-wishFox = { group = "com.sohuglobal", name = "foxsdk", version.ref = "wishFox" }
+immersionbar-java = { group = "com.geyifeng.immersionbar", name = "immersionbar", version.ref = "immersionbar" }
+immersionbar-kotlin = { group = "com.geyifeng.immersionbar", name = "immersionbar-ktx", version.ref = "immersionbar" }
+autoSize = { group = "com.github.JessYanCoding", name = "AndroidAutoSize", version.ref = "autoSize" }
+toaster = { group = "com.github.getActivity", name = "Toaster", version.ref = "toaster" }
+alipay = { group = "com.alipay.sdk", name = "alipaysdk-android", version.ref = "alipay" }
+wechat = { group = "com.tencent.mm.opensdk", name = "wechat-sdk-android", version.ref = "wechat" }
+shapeView = { group = "com.github.getActivity", name = "ShapeView", version.ref = "shapeView" }
+shapeDrawable = { group = "com.github.getActivity", name = "ShapeDrawable", version.ref = "shapeDrawable" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+bugly = { group = "com.tencent.bugly", name = "crashreport", version.ref = "bugly" }
+qiyukf = { group = "com.qiyukf.unicorn", name = "unicorn", version.ref = "qiyukf" }
+floatingx = { group = "io.github.petterpx", name = "floatingx", version.ref = "floatingx" }
+xpop = { group = "com.github.li-xiaojun", name = "XPopup", version.ref = "xpop" }
+roundImage = { group = "com.makeramen", name = "roundedimageview", version.ref = "roundImage" }
+refreshCore = { group = "io.github.scwang90", name = "refresh-layout-kernel", version.ref = "refresh" }
+refreshHeader = { group = "io.github.scwang90", name = "refresh-header-classics", version.ref = "refresh" }
+refreshFooter = { group = "io.github.scwang90", name = "refresh-footer-classics", version.ref = "refresh" }
+bravh = { group = "io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version.ref = "bravh" }
+viewModel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+banner = { group = "io.github.youth5201314", name = "banner", version.ref = "banner" }
+xXPermission = { group = "com.github.getActivity", name = "XXPermissions", version.ref = "xXPermission" }
+
+[bundles]
+common-utils = ["toaster", "shapeView", "shapeDrawable", "glide", "bugly", "floatingx", "xpop", "roundImage", "immersionbar-java", "immersionbar-kotlin", "banner", "xXPermission"]
+common-list = ["refreshCore", "refreshHeader", "refreshFooter", "bravh"]
+network-utils = ["viewModel-ktx", "runtime-ktx", "retrofit", "retrofit-gson", "okhttp-logging"]
+pay-utils = ["alipay", "wechat"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

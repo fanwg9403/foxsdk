@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!--h5MessageHandlerMap.put("android.permission.RECORD_AUDIO", "麦克风")
+        h5MessageHandlerMap.put("android.permission.CAMERA", "相机")
+        h5MessageHandlerMap.put("android.permission.READ_EXTERNAL_STORAGE", "存储")
+        h5MessageHandlerMap.put("android.permission.WRITE_EXTERNAL_STORAGE", "存储")
+        h5MessageHandlerMap.put("android.permission.READ_MEDIA_AUDIO", "多媒体文件")
+        h5MessageHandlerMap.put("android.permission.READ_MEDIA_IMAGES", "多媒体文件")
+        h5MessageHandlerMap.put("android.permission.READ_MEDIA_VIDEO", "多媒体文件")
+        h5MessageHandlerMap.put("android.permission.POST_NOTIFICATIONS", "通知栏权限")-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <queries>
+        <package android:name="com.sohuglobal.world" />
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.WishFoxSDK">
+
+        <!--适配华为（huawei）刘海屏-->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
+        <!--适配小米（xiaomi）刘海屏-->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
+
+        <activity android:name="com.sohuglobal.foxsdk.ui.view.activity.FSUserFollowsActivity" />
+        <!--新手礼包-->
+        <activity
+            android:name="com.sohuglobal.foxsdk.ui.view.activity.FSStarterPackActivity"
+            android:theme="@style/Theme.Transparent" />
+        <!--主界面-->
+        <activity
+            android:exported="true"
+            android:name="com.sohuglobal.foxsdk.ui.view.activity.FSHomeActivity"
+            android:theme="@style/Theme.Transparent" />
+        <!--赢狐币-->
+        <activity android:name="com.sohuglobal.foxsdk.ui.view.activity.FSWinFoxCoinActivity"
+            android:theme="@style/Theme.Transparent" />
+        <!--充值记录-->
+        <activity android:name="com.sohuglobal.foxsdk.ui.view.activity.FSRechargeRecordActivity"
+            android:theme="@style/Theme.Transparent"/>
+        <!--游戏记录-->
+        <activity android:name="com.sohuglobal.foxsdk.ui.view.activity.FSGameRecordActivity"
+            android:theme="@style/Theme.Transparent"/>
+        <!--消息列表-->
+        <activity
+            android:name="com.sohuglobal.foxsdk.ui.view.activity.FSMessageActivity"
+            android:theme="@style/Theme.Transparent" />
+        <!-- WebView -->
+        <activity
+            android:name="com.sohuglobal.foxsdk.ui.view.activity.FSWebActivity"
+            android:theme="@style/Theme.Transparent" />
+
+        <!-- 许愿狐授权入口 -->
+        <activity
+            android:name="com.sohuglobal.foxsdk.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:taskAffinity="com.sohuglobal.foxsdk"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name="com.sohuglobal.foxsdk.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:taskAffinity="com.sohuglobal.foxsdk"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name="com.sohuglobal.foxsdk.core.WishFoxEntryActivity"
+            android:exported="true"
+            android:label="WishFoxSdk"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+    </application>
+    <queries>
+        <package android:name="com.tencent.mm" />  <!-- // 指定微信包名-->
+    </queries>
+    <queries>
+        <package android:name="com.eg.android.AlipayGphone" /> <!-- 支付宝 -->
+        <package android:name="hk.alipay.wallet" /> <!-- AlipayHK -->
+    </queries>
+</manifest>
