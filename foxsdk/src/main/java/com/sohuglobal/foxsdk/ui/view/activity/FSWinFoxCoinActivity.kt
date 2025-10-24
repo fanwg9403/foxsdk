@@ -13,6 +13,7 @@ import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.sohuglobal.foxsdk.R
+import com.sohuglobal.foxsdk.core.FoxSdkConfig
 import com.sohuglobal.foxsdk.data.model.entity.FSGameSchemeData
 import com.sohuglobal.foxsdk.data.model.entity.FSWinFoxCoin
 import com.sohuglobal.foxsdk.databinding.FsActivityWinFoxCoinBinding
@@ -49,6 +50,7 @@ class FSWinFoxCoinActivity :
         }
     }
 
+    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
     override fun initView() {
         ImmersionBar.with(this)
             .statusBarDarkFont(false)

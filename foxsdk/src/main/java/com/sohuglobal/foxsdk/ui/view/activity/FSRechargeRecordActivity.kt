@@ -13,6 +13,7 @@ import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.sohuglobal.foxsdk.R
+import com.sohuglobal.foxsdk.core.FoxSdkConfig
 import com.sohuglobal.foxsdk.data.model.entity.FSRechargeRecord
 import com.sohuglobal.foxsdk.databinding.FsActivityRechargeRecordBinding
 import com.sohuglobal.foxsdk.di.FoxSdkViewModelFactory
@@ -43,6 +44,7 @@ class FSRechargeRecordActivity :
             context.startActivity(Intent(context, FSRechargeRecordActivity::class.java))
         }
     }
+    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
 
     override fun createBinding(): FsActivityRechargeRecordBinding =
         FsActivityRechargeRecordBinding.inflate(layoutInflater)

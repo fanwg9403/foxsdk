@@ -13,6 +13,7 @@ import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.sohuglobal.foxsdk.R
+import com.sohuglobal.foxsdk.core.FoxSdkConfig
 import com.sohuglobal.foxsdk.data.model.entity.FSStarterPack
 import com.sohuglobal.foxsdk.databinding.FsActivityStarterPackBinding
 import com.sohuglobal.foxsdk.di.FoxSdkViewModelFactory
@@ -47,6 +48,7 @@ class FSStarterPackActivity :
         }
     }
 
+    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
     override fun initView() {
         ImmersionBar.with(this)
             .statusBarDarkFont(false)
@@ -105,6 +107,7 @@ class FSStarterPackActivity :
                         ) {
                             when (view.id) {
                                 R.id.fs_shp_tv_on -> {
+                                    if (isFastClick()) return
                                     viewModel.clicklPostion = position
                                     when (adapter.items[position].status) {
                                         1 -> {
@@ -130,6 +133,18 @@ class FSStarterPackActivity :
 
 
 
+    }
+
+    private var lastClickTime = 0L
+    private val CLICK_INTERVAL = 3000
+
+    fun isFastClick(): Boolean {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastClickTime < CLICK_INTERVAL) {
+            return true
+        }
+        lastClickTime = currentTime
+        return false
     }
 
 

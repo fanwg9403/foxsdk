@@ -12,6 +12,7 @@ import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.sohuglobal.foxsdk.R
+import com.sohuglobal.foxsdk.core.FoxSdkConfig
 import com.sohuglobal.foxsdk.data.model.entity.FSGameRecord
 import com.sohuglobal.foxsdk.databinding.FsActivityGameRecordBinding
 import com.sohuglobal.foxsdk.di.FoxSdkViewModelFactory
@@ -41,6 +42,7 @@ class FSGameRecordActivity :
         }
     }
 
+    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
     private val gameRecordAdapter: FSGameRecordAdapter by lazy {
         FSGameRecordAdapter()
     }
