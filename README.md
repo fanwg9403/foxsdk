@@ -617,9 +617,9 @@ copies or substantial portions of the Software.
 ## 📞 支持
 如有问题，请联系：   
 ●Email: fanweiguang@vcglobal.com.cn   
-●GitHub Issues: http://192.168.150.252:9980/wishfox/mobile/android/wishfoxsdk# 
+●GitHub Issues: https://github.com/fanwg9403/foxsdk/issues 
 
 ------------------------------------------------------------------------------
 版本: 1.0.0   
-最后更新: 2025-10-13   
+最后更新: 2025-10-24   
 兼容性: Android 5.0+ (API 21+)
