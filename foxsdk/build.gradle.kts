@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    `maven-publish`
 }
 
 android {
@@ -75,4 +76,21 @@ dependencies {
 
     // 支付框架
     api(libs.bundles.pay.utils)
+}
+
+// JitPack 发布配置
+group = "com.github.fanwg9403"
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.github.fanwg9403"
+            artifactId = "foxsdk"
+            version = "1.0.0"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }
