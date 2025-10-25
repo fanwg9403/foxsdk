@@ -31,9 +31,9 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
     }
 
     private val binding by lazy { FsDialogLoginBinding.inflate(layoutInflater) }
-    private val phone = CustomLiveData("15623058861")
-    private val verifyCode = CustomLiveData("9683")
-    private val password = CustomLiveData("123456")
+    private val phone = CustomLiveData("")
+    private val verifyCode = CustomLiveData("")
+    private val password = CustomLiveData("")
     private var loading: FSLoadingDialog? = null
     private var mListener: ((arg1: String, arg2: String, type: Int) -> Unit)? = null
 

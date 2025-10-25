@@ -48,7 +48,7 @@ class FSStarterPackActivity :
         }
     }
 
-    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
+//    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
     override fun initView() {
         ImmersionBar.with(this)
             .statusBarDarkFont(false)

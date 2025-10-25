@@ -24,7 +24,7 @@ data class FoxSdkConfig(
     val screenOrientation: Int = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED,
 ) {
     companion object {
-        const val ORIENTATION_AUTO = 0
+//        const val ORIENTATION_AUTO = 0
         const val ORIENTATION_PORTRAIT = 1
         const val ORIENTATION_LANDSCAPE = 2
 

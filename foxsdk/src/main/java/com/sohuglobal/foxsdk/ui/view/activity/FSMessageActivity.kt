@@ -40,7 +40,7 @@ class FSMessageActivity :
         }
     }
     private var _detailShow = false
-    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
+//    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
 
     override fun createBinding() = FsActivityMessageBinding.inflate(layoutInflater)
     override fun initView() {

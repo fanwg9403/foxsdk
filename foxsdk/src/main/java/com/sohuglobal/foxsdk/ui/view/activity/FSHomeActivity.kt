@@ -114,7 +114,7 @@ class FSHomeActivity :
         }
     }
 
-    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
+//    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
 
     private val adapterHelper by lazy { QuickAdapterHelper.Builder(userInfoAdapter).build() }
 

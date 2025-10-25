@@ -178,9 +178,9 @@ abstract class FoxSdkBaseMviActivity<VS : FoxSdkViewState, VI : FoxSdkViewIntent
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             }
 
-            FoxSdkConfig.ORIENTATION_AUTO -> {
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
-            }
+//            FoxSdkConfig.ORIENTATION_AUTO -> {
+//                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
+//            }
         }
     }
 }

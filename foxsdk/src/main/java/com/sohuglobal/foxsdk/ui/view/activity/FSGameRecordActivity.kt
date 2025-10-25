@@ -42,7 +42,7 @@ class FSGameRecordActivity :
         }
     }
 
-    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
+//    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
     private val gameRecordAdapter: FSGameRecordAdapter by lazy {
         FSGameRecordAdapter()
     }

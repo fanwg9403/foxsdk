@@ -44,7 +44,7 @@ class FSRechargeRecordActivity :
             context.startActivity(Intent(context, FSRechargeRecordActivity::class.java))
         }
     }
-    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
+//    override fun getScreenOrientation() = FoxSdkConfig.ORIENTATION_AUTO
 
     override fun createBinding(): FsActivityRechargeRecordBinding =
         FsActivityRechargeRecordBinding.inflate(layoutInflater)
