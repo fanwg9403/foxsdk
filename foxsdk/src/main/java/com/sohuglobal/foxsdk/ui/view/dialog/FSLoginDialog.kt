@@ -214,6 +214,8 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
         super.dismiss()
         loading?.dismiss()
         _instance = null
+        timeouter?.cancel()
+        timeouter = null
     }
 
     /**
