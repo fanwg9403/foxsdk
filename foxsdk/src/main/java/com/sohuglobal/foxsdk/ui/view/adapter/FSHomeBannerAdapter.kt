@@ -21,11 +21,14 @@ class FSHomeBannerAdapter : BaseSingleItemAdapter<List<FSHomeBanner>, FSHomeBann
 
     override fun onBindViewHolder(holder: VH, item: List<FSHomeBanner>?) {
         if (item != null && item.isNotEmpty()) {
+            holder.binding.fsHomeBanner.isVisible = true
             val mAdapter = FSBannerAdapter()
             holder.binding.fsHomeBanner.apply {
                 setAdapter(mAdapter)
                 mAdapter.setDatas(item)
             }
+        } else {
+            holder.binding.fsHomeBanner.isVisible = false
         }
     }
 
