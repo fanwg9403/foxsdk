@@ -15,7 +15,7 @@ data class FoxSdkConfig(
     // 游戏key
     val channelId: String,
     // 接口域名
-    val baseUrl: String = "http://192.168.150.240:9113",
+    val baseUrl: String = "https://api-game.wishfoxs.com",
     // 是否开启log日志
     val enableLog: Boolean = false,
     // 网络请求超时时间
