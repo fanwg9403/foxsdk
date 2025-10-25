@@ -3,7 +3,7 @@ package com.sohuglobal.foxsdk.utils.pay
 /**
  * 全局配置
  */
-object FoxSdkConfig {
+object FoxSdkPayConfig {
     const val APP_ID: String = "wxb5fb9cfaccc07ce8"
 
     //支付宝appId

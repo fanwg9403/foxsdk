@@ -29,9 +29,9 @@ object FoxSdkWxPay {
             return false
         }
         val storage = FoxSdkSPUtils.getInstance()
-        val api: IWXAPI = WXAPIFactory.createWXAPI(context, FoxSdkConfig.APP_ID)
+        val api: IWXAPI = WXAPIFactory.createWXAPI(context, FoxSdkPayConfig.APP_ID)
         val req: WXLaunchMiniProgram.Req = WXLaunchMiniProgram.Req()
-        req.userName = FoxSdkConfig.MINI_PROGRAM_ID // 填小程序原始id
+        req.userName = FoxSdkPayConfig.MINI_PROGRAM_ID // 填小程序原始id
         var path = "contentPackages/payPage/payPage?token=${storage.get(FoxSdkConstant.AUTHORIZATION)}"
         val toMutableMap = map.toMutableMap()
         if(toMutableMap["payChannel"]!=="Android"){
