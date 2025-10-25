@@ -11,7 +11,6 @@ import com.sohuglobal.foxsdk.data.model.entity.FSPayResult
 import com.sohuglobal.foxsdk.data.network.FoxSdkApiService
 import com.sohuglobal.foxsdk.data.network.FoxSdkRetrofitManager
 import com.sohuglobal.foxsdk.data.model.entity.FSCoinInfo
-import com.sohuglobal.foxsdk.data.model.entity.FSUserInfo
 import com.sohuglobal.foxsdk.databinding.FsDialogPayBinding
 import com.sohuglobal.foxsdk.ui.view.widgets.FSLoadingDialog
 import com.sohuglobal.foxsdk.utils.FoxSdkPayEnum
@@ -194,7 +193,7 @@ class FSPayDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
                     }
                 } else {
                     loading?.dismiss()
-                    Toaster.show(it.message)
+                    Toaster.show(it.msg)
                 }
             }.onFailure {
                 loading?.dismiss()

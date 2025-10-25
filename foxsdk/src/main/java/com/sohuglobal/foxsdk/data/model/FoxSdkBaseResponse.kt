@@ -9,7 +9,7 @@ package com.sohuglobal.foxsdk.data.model
  */
 data class FoxSdkBaseResponse<T>(
     val code: Int,
-    val message: String? = null,
+    val msg: String? = null,
     val data: T? = null,
     val total: Int = 0
 ) {

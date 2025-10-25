@@ -43,16 +43,16 @@ object FoxSdkNetworkExecutor {
 
             when {
                 response.isSuccess && response.data != null -> {
-                    FoxSdkNetworkResult.Success(response.data, response.message)
+                    FoxSdkNetworkResult.Success(response.data, response.msg)
                 }
 
                 response.isSuccess && response.data == null -> {
-                    FoxSdkNetworkResult.Empty(response.message ?: "数据为空")
+                    FoxSdkNetworkResult.Empty(response.msg ?: "数据为空")
                 }
 
                 else -> {
                     FoxSdkNetworkResult.Error(
-                        error = response.message ?: "请求失败",
+                        error = response.msg ?: "请求失败",
                         code = response.code
                     )
                 }
@@ -78,16 +78,16 @@ object FoxSdkNetworkExecutor {
 
             val result = when {
                 response.isSuccess && response.data != null -> {
-                    FoxSdkNetworkResult.Success(response.data, response.message)
+                    FoxSdkNetworkResult.Success(response.data, response.msg)
                 }
 
                 response.isSuccess && response.data == null -> {
-                    FoxSdkNetworkResult.Empty(response.message ?: "数据为空")
+                    FoxSdkNetworkResult.Empty(response.msg ?: "数据为空")
                 }
 
                 else -> {
                     FoxSdkNetworkResult.Error(
-                        error = response.message ?: "请求失败",
+                        error = response.msg ?: "请求失败",
                         code = response.code
                     )
                 }
@@ -139,7 +139,7 @@ object FoxSdkNetworkExecutor {
                 else -> {
                     emit(
                         FoxSdkNetworkResult.PageError(
-                            error = response.message ?: "请求失败",
+                            error = response.msg ?: "请求失败",
                             page = pageRequest.page,
                             code = response.code
                         )
@@ -199,7 +199,7 @@ object FoxSdkNetworkExecutor {
                 else -> {
                     emit(
                         FoxSdkNetworkResult.PageError(
-                            error = response.message ?: "请求失败",
+                            error = response.msg ?: "请求失败",
                             page = pageRequest.page,
                             code = response.code
                         )
@@ -281,7 +281,7 @@ object FoxSdkNetworkExecutor {
                 else -> {
                     emit(
                         FoxSdkNetworkResult.PageError(
-                            error = response.message ?: "请求失败",
+                            error = response.msg ?: "请求失败",
                             page = pageRequest.page,
                             code = response.code
                         )

@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.core.view.isVisible
 import com.hjq.toast.Toaster
 import com.sohuglobal.foxsdk.R
@@ -23,11 +22,8 @@ import com.sohuglobal.foxsdk.utils.onClick
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 import java.util.Timer
 import java.util.TimerTask
-import kotlin.coroutines.Continuation
 
 
 /**
@@ -107,7 +103,7 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
                     if (it.code == 200) {
                         Toaster.show("验证码发送成功")
                         startTimeout()
-                    } else Toaster.show(it.message ?: "验证码发送失败")
+                    } else Toaster.show(it.msg ?: "验证码发送失败")
                     FoxSdkUtils.runOnUIThread { loading?.dismiss() }
                 }.onFailure {
                     Toaster.show(it.message ?: "验证码发送失败")
@@ -191,7 +187,7 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
             }
         } else {
             if (phonePass && passwordPass && isAgreement) {
-                binding.fsTvLogin.isEnabled = false
+                binding.fsTvLogin.isEnabled = true
                 binding.fsTvLogin.alpha = 1f
             } else {
                 binding.fsTvLogin.isEnabled = false
