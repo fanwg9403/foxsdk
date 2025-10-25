@@ -160,10 +160,10 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
                 @SuppressLint("SetTextI18n")
                 override fun run() {
                     if (time > 0) {
-                        binding.fsTvSendVerifyCode.text = "${time}S"
+                        FoxSdkUtils.runOnUIThread { binding.fsTvSendVerifyCode.text = "${time}S" }
                         time--
                     } else {
-                        binding.fsTvSendVerifyCode.setText(R.string.fs_send_verify_code)
+                        FoxSdkUtils.runOnUIThread { binding.fsTvSendVerifyCode.setText(R.string.fs_send_verify_code) }
                         timeouter?.cancel()
                         timeouter = null
                     }
