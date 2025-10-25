@@ -25,6 +25,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.Dispatcher
+import java.util.Timer
+import java.util.TimerTask
 import kotlin.coroutines.Continuation
 
 
@@ -46,6 +48,8 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
     private var loading: FSLoadingDialog? = null
     private var mListener: ((arg1: String, arg2: String, type: Int) -> Unit)? = null
 
+    private var timeouter: Timer? = null
+    private var time = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +83,7 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
             }
         }
         binding.fsTvSendVerifyCode.onClick {
+            if (timeouter != null) return@onClick
             if (phone.value.isNullOrEmpty()) {
                 Toaster.show("请输入手机号")
                 return@onClick
@@ -99,8 +104,10 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
                         )
                     )
                 }.onSuccess {
-                    if (it.code == 200) Toaster.show("验证码发送成功")
-                    else Toaster.show(it.message ?: "验证码发送失败")
+                    if (it.code == 200) {
+                        Toaster.show("验证码发送成功")
+                        startTimeout()
+                    } else Toaster.show(it.message ?: "验证码发送失败")
                     FoxSdkUtils.runOnUIThread { loading?.dismiss() }
                 }.onFailure {
                     Toaster.show(it.message ?: "验证码发送失败")
@@ -149,6 +156,26 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
         }
     }
 
+    private fun startTimeout() {
+        if (timeouter != null) return
+        time = 60
+        timeouter = Timer().apply {
+            schedule(object : TimerTask() {
+                @SuppressLint("SetTextI18n")
+                override fun run() {
+                    if (time > 0) {
+                        binding.fsTvSendVerifyCode.text = "${time}S"
+                        time--
+                    } else {
+                        binding.fsTvSendVerifyCode.setText(R.string.fs_send_verify_code)
+                        timeouter?.cancel()
+                        timeouter = null
+                    }
+                }
+            }, 0, 1000)
+        }
+    }
+
     private fun checkCanLogin() {
         val phonePass = phone.value?.length == 11
         val verifyCodePass = (verifyCode.value?.length ?: 0) > 3
@@ -187,6 +214,8 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
         super.dismiss()
         loading?.dismiss()
         _instance = null
+        timeouter?.cancel()
+        timeouter = null
     }
 
     /**
