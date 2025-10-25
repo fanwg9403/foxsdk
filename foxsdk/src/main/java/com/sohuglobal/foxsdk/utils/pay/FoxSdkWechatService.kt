@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
-import android.util.Log
 import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
@@ -23,12 +22,12 @@ object FoxSdkWechatService {
      */
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     fun init(context: Context) {
-        iwxapi = WXAPIFactory.createWXAPI(context, FoxSdkConfig.APP_ID, true)
-        iwxapi!!.registerApp(FoxSdkConfig.APP_ID)
+        iwxapi = WXAPIFactory.createWXAPI(context, FoxSdkPayConfig.APP_ID, true)
+        iwxapi!!.registerApp(FoxSdkPayConfig.APP_ID)
         val filter = IntentFilter(ConstantsAPI.ACTION_REFRESH_WXAPP)
         val receiver: BroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                iwxapi!!.registerApp(FoxSdkConfig.APP_ID)
+                iwxapi!!.registerApp(FoxSdkPayConfig.APP_ID)
             }
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
