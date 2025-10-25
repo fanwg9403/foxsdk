@@ -7,16 +7,25 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import com.hjq.toast.Toaster
 import com.sohuglobal.foxsdk.R
 import com.sohuglobal.foxsdk.core.FoxSdkConfig
 import com.sohuglobal.foxsdk.databinding.FsDialogLoginBinding
 import com.sohuglobal.foxsdk.core.WishFoxEntryActivity
+import com.sohuglobal.foxsdk.core.WishFoxSdk
+import com.sohuglobal.foxsdk.data.network.FoxSdkRetrofitManager
 import com.sohuglobal.foxsdk.ui.view.activity.FSWebActivity
 import com.sohuglobal.foxsdk.ui.view.widgets.FSLoadingDialog
 import com.sohuglobal.foxsdk.utils.FoxSdkUtils
 import com.sohuglobal.foxsdk.utils.custom.CustomLiveData
 import com.sohuglobal.foxsdk.utils.custom.CustomTextWatcher
 import com.sohuglobal.foxsdk.utils.onClick
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.Dispatcher
+import kotlin.coroutines.Continuation
 
 
 /**
@@ -31,9 +40,9 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
     }
 
     private val binding by lazy { FsDialogLoginBinding.inflate(layoutInflater) }
-    private val phone = CustomLiveData("")
-    private val verifyCode = CustomLiveData("")
-    private val password = CustomLiveData("")
+    private val phone = CustomLiveData<String>()
+    private val verifyCode = CustomLiveData<String>()
+    private val password = CustomLiveData<String>()
     private var loading: FSLoadingDialog? = null
     private var mListener: ((arg1: String, arg2: String, type: Int) -> Unit)? = null
 
@@ -67,6 +76,36 @@ class FSLoginDialog(val ctx: Context) : Dialog(ctx, R.style.FSLoadingDialog) {
                 mListener?.invoke(phone.value ?: "", verifyCode.value ?: "", 2)
             } else {
                 mListener?.invoke(phone.value ?: "", password.value ?: "", 1)
+            }
+        }
+        binding.fsTvSendVerifyCode.onClick {
+            if (phone.value.isNullOrEmpty()) {
+                Toaster.show("请输入手机号")
+                return@onClick
+            } else if (phone.value?.length != 11 || !phone.value!!.matches(Regex("^1[3-9]\\d{9}$"))) {
+                Toaster.show("请输入正确的手机号")
+                return@onClick
+            }
+            loading = FSLoadingDialog(ctx)
+            loading?.show()
+            CoroutineScope(Dispatchers.IO).launch {
+                val userName = phone.value ?: ""
+                runCatching {
+                    FoxSdkRetrofitManager.getApiService().sendSmsCode(
+                        mapOf(
+                            "channel_id" to WishFoxSdk.getConfig().channelId,
+                            "app_id" to WishFoxSdk.getConfig().appId,
+                            "user_name" to userName
+                        )
+                    )
+                }.onSuccess {
+                    if (it.code == 200) Toaster.show("验证码发送成功")
+                    else Toaster.show(it.message ?: "验证码发送失败")
+                    FoxSdkUtils.runOnUIThread { loading?.dismiss() }
+                }.onFailure {
+                    Toaster.show(it.message ?: "验证码发送失败")
+                    FoxSdkUtils.runOnUIThread { loading?.dismiss() }
+                }
             }
         }
         binding.fsEtPhone.setText(phone.value)

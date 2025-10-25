@@ -162,4 +162,7 @@ interface FoxSdkApiService {
         @Query("page_size") pageSize: Int,
         @Query("ad_place_code") adPlace: String
     ): FoxSdkBaseResponse<List<FSHomeBanner>>
+
+    @POST("/api/user/code")
+    suspend fun sendSmsCode(@QueryMap params: Map<String, String>): FoxSdkBaseResponse<Object>
 }
